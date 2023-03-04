@@ -1,13 +1,16 @@
-import mysql from 'mysql2';
+import mysql from 'mysql2/promise';
+import { dbConfig } from '../config/config';
 
-const connectDB = async (url: string) => {
-  const connectDB = mysql.createConnection(url);
+const connectDB = async () => {
+  const connectDB = mysql.createPool(dbConfig);
 
-  connectDB.connect((err) => {
-    if (err) throw err;
+  return connectDB;
 
-    console.log('Connect database success!!');
-  });
+  // connectDB.connect((err) => {
+  //   if (err) throw err;
+
+  //   console.log('Connect database success!!');
+  // });
 };
 
 export default connectDB;

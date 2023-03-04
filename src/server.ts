@@ -1,4 +1,5 @@
 import express from 'express';
+import 'express-async-errors';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -9,12 +10,17 @@ import multer from 'multer';
 import routeAuth from './routes/auth';
 import routeApi from './routes/api';
 import connectDB from './services/connectDB';
+import errorHandler from './middlewares/errorHandler';
+import ValidationErrors from './errors/ValidationErrors';
 
 dotenv.config();
 
+const server = express();
 const port = process.env.PORT || 6868;
 
-const server = express();
+if (process.env.NODE_ENV === 'development') {
+  server.use('*', errorHandler);
+}
 
 server.use(express.json());
 server.use(helmet());
@@ -45,8 +51,13 @@ server.get('/', (req, res) => {
   res.send('Server Social Tech');
 });
 
-connectDB(process.env.DATABASE_URL).then(() => {
-  server.listen(port, () => {
-    console.log('Open port ', port);
+connectDB()
+  .then(() => {
+    console.log('Connect DB success!!');
+    server.listen(port, () => {
+      console.log('Open port ', port);
+    });
+  })
+  .catch((err) => {
+    if (err) throw new ValidationErrors('Errors Connect DB', 'Error connect');
   });
-});
