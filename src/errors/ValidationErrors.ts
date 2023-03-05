@@ -3,6 +3,7 @@ import CustomError from './CustomError';
 class ValidationErrors extends CustomError {
   errCode = 400;
   errType = 'VALIDATION_ERROR';
+  success = false;
 
   constructor(message: string, private property: string) {
     super(message);
@@ -11,7 +12,7 @@ class ValidationErrors extends CustomError {
   }
 
   serializeErrors() {
-    return [{ message: this.message, property: this.property }];
+    return [{ message: this.message, property: this.property, success: this.success }];
   }
 }
 

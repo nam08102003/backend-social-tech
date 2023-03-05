@@ -1,15 +1,12 @@
 import { Router, Request, Response } from 'express';
-import { registerUser } from '../controllers/auth';
-import ValidationErrors from '../errors/ValidationErrors';
+import { registerUser, loginUser, logoutUser } from '../controllers/authControllers';
 
 const router = Router();
 
-router.post('/login', registerUser);
+router.post('/login', loginUser);
 
 router.post('/register', registerUser);
 
-router.post('/logout', (req: Request, res: Response) => {
-  res.send('Logout');
-});
+router.post('/logout', logoutUser);
 
 export default router;

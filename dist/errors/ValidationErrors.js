@@ -10,10 +10,11 @@ class ValidationErrors extends CustomError_1.default {
         this.property = property;
         this.errCode = 400;
         this.errType = 'VALIDATION_ERROR';
+        this.success = false;
         Object.setPrototypeOf(this, ValidationErrors.prototype);
     }
     serializeErrors() {
-        return [{ message: this.message, property: this.property }];
+        return [{ message: this.message, property: this.property, success: this.success }];
     }
 }
 exports.default = ValidationErrors;
