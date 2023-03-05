@@ -19,7 +19,12 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     try {
         const data = req.body;
         const newUser = yield (0, userServices_1.createUser)(data);
-        console.log(newUser);
+        if (newUser) {
+            res.status(200).json({
+                success: true,
+                newUser
+            });
+        }
     }
     catch (err) {
         console.log(err);
