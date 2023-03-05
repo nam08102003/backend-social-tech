@@ -1,3 +1,4 @@
+import mysql2 from 'mysql2';
 import { Sequelize } from 'sequelize-typescript';
 import { dbConfig } from '../config/config';
 import { User } from './User';
@@ -12,6 +13,7 @@ const sequelize = new Sequelize({
   password: dbConfig?.password,
   database: dbConfig?.database,
   dialect: 'mysql',
+  dialectModule: mysql2,
   logging: false,
   dialectOptions: {
     ssl: {
