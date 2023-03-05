@@ -59,4 +59,5 @@ server.get('/', (req, res) => {
     if (err)
         throw new ValidationErrors_1.default('Errors', 'Errors');
 });
+module.exports = server;
 //# sourceMappingURL=server.js.map

@@ -62,3 +62,5 @@ initDB()
   .catch((err) => {
     if (err) throw new ValidationErrors('Errors', 'Errors');
   });
+
+module.exports = server;
