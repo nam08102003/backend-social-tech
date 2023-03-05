@@ -42,7 +42,7 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage });
+// const upload = multer({ storage });
 
 // ROUTE API
 server.use('/auth', routeAuth);
