@@ -1,5 +1,6 @@
 import express from 'express';
 import 'express-async-errors';
+import 'reflect-metadata';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -9,9 +10,9 @@ import path from 'path';
 import multer from 'multer';
 import routeAuth from './routes/auth';
 import routeApi from './routes/api';
-import connectDB from './services/connectDB';
 import errorHandler from './middlewares/errorHandler';
 import ValidationErrors from './errors/ValidationErrors';
+import { initDB } from './models/connection';
 
 dotenv.config();
 
@@ -51,13 +52,13 @@ server.get('/', (req, res) => {
   res.send('Server Social Tech');
 });
 
-connectDB()
+initDB()
   .then(() => {
-    console.log('Connect DB success!!');
+    console.log('Connect Database Success!!!');
     server.listen(port, () => {
       console.log('Open port ', port);
     });
   })
   .catch((err) => {
-    if (err) throw new ValidationErrors('Errors Connect DB', 'Error connect');
+    if (err) throw new ValidationErrors('Errors', 'Errors');
   });
