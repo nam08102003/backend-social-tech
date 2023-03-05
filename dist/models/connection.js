@@ -27,7 +27,7 @@ const sequelize = new sequelize_typescript_1.Sequelize({
     username: config_1.dbConfig === null || config_1.dbConfig === void 0 ? void 0 : config_1.dbConfig.username,
     password: config_1.dbConfig === null || config_1.dbConfig === void 0 ? void 0 : config_1.dbConfig.password,
     database: config_1.dbConfig === null || config_1.dbConfig === void 0 ? void 0 : config_1.dbConfig.database,
-    dialect: config_1.dbConfig === null || config_1.dbConfig === void 0 ? void 0 : config_1.dbConfig.dialect,
+    dialect: 'mysql',
     logging: false,
     dialectOptions: {
         ssl: {
