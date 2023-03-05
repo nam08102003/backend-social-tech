@@ -8,8 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserMessage = exports.UserFriend = exports.UserFollower = exports.UserPost = exports.User = exports.initDB = void 0;
+const mysql2_1 = __importDefault(require("mysql2"));
 const sequelize_typescript_1 = require("sequelize-typescript");
 const config_1 = require("../config/config");
 const User_1 = require("./User");
@@ -28,6 +32,7 @@ const sequelize = new sequelize_typescript_1.Sequelize({
     password: config_1.dbConfig === null || config_1.dbConfig === void 0 ? void 0 : config_1.dbConfig.password,
     database: config_1.dbConfig === null || config_1.dbConfig === void 0 ? void 0 : config_1.dbConfig.database,
     dialect: 'mysql',
+    dialectModule: mysql2_1.default,
     logging: false,
     dialectOptions: {
         ssl: {
