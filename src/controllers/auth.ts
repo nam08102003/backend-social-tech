@@ -7,7 +7,12 @@ export const registerUser = async (req: Request, res: Response) => {
     const data = req.body;
 
     const newUser = await createUser(data);
-    console.log(newUser);
+    if (newUser) {
+      res.status(200).json({
+        success: true,
+        newUser
+      });
+    }
   } catch (err) {
     console.log(err);
     if (err) throw new ValidationErrors('Have some errors', 'errors');
