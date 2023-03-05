@@ -22,6 +22,9 @@ export class User extends Model {
   @Column({ type: DataType.STRING, allowNull: true })
   public fullName!: string;
 
+  @Column({ type: DataType.STRING })
+  public bỉthday!: string;
+
   @IsEmail
   @Column({ type: DataType.STRING, allowNull: false })
   public email!: string;
@@ -41,6 +44,6 @@ export class User extends Model {
   @Column({ type: DataType.TEXT })
   public avatar!: string;
 
-  @Column({ type: DataType.DATE })
+  @Column({ type: DataType.STRING })
   public lastLogin!: string;
 }

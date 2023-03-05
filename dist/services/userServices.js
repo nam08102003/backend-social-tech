@@ -8,12 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUserById = exports.updateUserById = exports.findOneUser = exports.userExists = exports.getUserById = exports.createUser = void 0;
+exports.deleteUserById = exports.updateUserById = exports.findOneUser = exports.validatePassword = exports.userExists = exports.getUserById = exports.createUser = void 0;
 const encrypt_1 = require("../utils/encrypt");
 const connection_1 = require("../models/connection");
 const sequelize_1 = require("sequelize");
+const ValidationErrors_1 = __importDefault(require("../errors/ValidationErrors"));
+const encrypt_2 = require("../utils/encrypt");
 const createUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    payload.fullName = (payload === null || payload === void 0 ? void 0 : payload.firstName) + ' ' + (payload === null || payload === void 0 ? void 0 : payload.lastName);
     payload.password = (0, encrypt_1.encryptSync)(payload.password);
     const user = yield connection_1.User.create(payload);
     return user;
@@ -24,7 +30,7 @@ const getUserById = (id) => __awaiter(void 0, void 0, void 0, function* () {
         attributes: { exclude: ['password'] }
     });
     if (!user) {
-        throw new Error('User not found');
+        throw new ValidationErrors_1.default('Không tìm thấy tài khoản', 'errors');
     }
     return user;
 });
@@ -34,7 +40,7 @@ const userExists = (options = {
     mobile: null
 }) => __awaiter(void 0, void 0, void 0, function* () {
     if (!options.email) {
-        throw new Error('Please provide either of these options: email');
+        throw new ValidationErrors_1.default('Vui lòng nhập email', 'User');
     }
     const where = {
         [sequelize_1.Op.or]: []
@@ -49,22 +55,23 @@ const userExists = (options = {
     return users.length > 0;
 });
 exports.userExists = userExists;
-// export const validatePassword = async (email: string, password: string) => {
-//   if (!email && !password) {
-//     throw new Error('Please provide email and password');
-//   }
-//   const where = {
-//     [Op.or]: [] as any
-//   };
-//   if (email) {
-//     where[Op.or].push({ email: email });
-//   }
-//   const user = await User.findOne({ where });
-//   return User.password(password, user.password);
-// };
+const validatePassword = (email, password) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!email && !password) {
+        throw new ValidationErrors_1.default('Vui lòng nhập emai và password', 'errors');
+    }
+    const where = {
+        [sequelize_1.Op.or]: []
+    };
+    if (email) {
+        where[sequelize_1.Op.or].push({ email: email });
+    }
+    const user = yield connection_1.User.findOne({ where });
+    return (0, encrypt_2.compareSync)(password, user.password);
+});
+exports.validatePassword = validatePassword;
 const findOneUser = (options) => __awaiter(void 0, void 0, void 0, function* () {
     if (!options.email && !options.id) {
-        throw new Error('Please provide email or id ');
+        throw new ValidationErrors_1.default('Please provide email or id ', 'User');
     }
     const where = {
         [sequelize_1.Op.or]: []
@@ -82,19 +89,19 @@ const findOneUser = (options) => __awaiter(void 0, void 0, void 0, function* () 
     return user;
 });
 exports.findOneUser = findOneUser;
-const updateUserById = (user, userId) => {
-    if (!user && !userId) {
-        throw new Error('Please provide user data and/or user id to update');
+const updateUserById = (data, userId) => {
+    if (!data && !userId) {
+        throw new ValidationErrors_1.default('Vui lòng nhập dữ liệu cần thay đổi và idUser', 'errors');
     }
     if (userId && isNaN(userId)) {
-        throw new Error('Invalid user id');
+        throw new ValidationErrors_1.default('idUser không hợp lệ', 'errors');
     }
-    if (user.id || userId) {
-        const id = user.id || userId;
-        if (user.password) {
-            user.password = (0, encrypt_1.encryptSync)(user.password);
+    if (data.id || userId) {
+        const id = data.id || userId;
+        if (data.password) {
+            data.password = (0, encrypt_1.encryptSync)(data.password);
         }
-        return connection_1.User.update(user, {
+        return connection_1.User.update(data, {
             where: { id: id }
         });
     }
@@ -102,10 +109,10 @@ const updateUserById = (user, userId) => {
 exports.updateUserById = updateUserById;
 const deleteUserById = (userId) => {
     if (!userId) {
-        throw new Error('Please user id to delete');
+        throw new ValidationErrors_1.default('Please user id to delete', 'User');
     }
     if (userId && isNaN(userId)) {
-        throw new Error('Invalid user id');
+        throw new ValidationErrors_1.default('Invalid user id', 'User');
     }
     return connection_1.User.destroy({
         where: { id: userId }
