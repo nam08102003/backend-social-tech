@@ -41,7 +41,7 @@ const storage = multer_1.default.diskStorage({
         cb(null, file.originalname);
     }
 });
-// const upload = multer({ storage });
+const upload = (0, multer_1.default)({ storage });
 // ROUTE API
 server.use('/auth', auth_1.default);
 server.use('/api', api_1.default);
@@ -56,6 +56,7 @@ server.get('/', (req, res) => {
     });
 })
     .catch((err) => {
+    console.log(err);
     if (err)
         throw new ValidationErrors_1.default('Errors', 'Errors');
 });
