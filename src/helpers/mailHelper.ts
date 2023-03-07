@@ -7,7 +7,8 @@ const sender = nodemailer.createTransport({
   auth: {
     user: emailConfig.emailUser,
     pass: emailConfig.emailPassword
-  }
+  },
+  secure: true
 });
 
 export const sendOTP = (email: string, otp?: string, titleMail?: string, template?: Function) => {

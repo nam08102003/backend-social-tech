@@ -12,7 +12,8 @@ const sender = nodemailer_1.default.createTransport({
     auth: {
         user: config_1.emailConfig.emailUser,
         pass: config_1.emailConfig.emailPassword
-    }
+    },
+    secure: true
 });
 const sendOTP = (email, otp, titleMail, template) => {
     return (0, exports.sendMail)({
