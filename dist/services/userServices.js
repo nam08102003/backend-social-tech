@@ -20,7 +20,6 @@ const ValidationErrors_1 = __importDefault(require("../errors/ValidationErrors")
 const encrypt_2 = require("../utils/encrypt");
 const createUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const gender = payload === null || payload === void 0 ? void 0 : payload.gender;
-    console.log(gender);
     if (gender.toUpperCase() === 'NỮ') {
         payload.gender = 1;
     }
