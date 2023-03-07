@@ -23,7 +23,10 @@ export class User extends Model {
   public fullName!: string;
 
   @Column({ type: DataType.STRING })
-  public bỉthday!: string;
+  public birthday!: string;
+
+  @Column({ type: DataType.INTEGER }) //0: Nam, 1: Nữ, 2: Khác
+  public gender!: number;
 
   @IsEmail
   @Column({ type: DataType.STRING, allowNull: false })
@@ -46,4 +49,7 @@ export class User extends Model {
 
   @Column({ type: DataType.STRING })
   public lastLogin!: string;
+
+  @Column({ type: DataType.INTEGER }) //0: Admin, 1: Người dùng
+  public roleId!: number;
 }

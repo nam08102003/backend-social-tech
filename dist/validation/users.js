@@ -7,8 +7,10 @@ exports.updateSchema = exports.loginSchema = exports.registerSchema = void 0;
 const joi_1 = __importDefault(require("joi"));
 exports.registerSchema = joi_1.default.object({
     firstName: joi_1.default.string().required(),
-    fullName: joi_1.default.string().required(),
+    lastName: joi_1.default.string().required(),
     email: joi_1.default.string().email().required(),
+    gender: joi_1.default.number().required(),
+    birthday: joi_1.default.string().required(),
     password: joi_1.default.string().min(6).required(),
     confirm_password: joi_1.default.string().min(6)
 });
