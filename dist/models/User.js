@@ -37,7 +37,12 @@ __decorate([
 __decorate([
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }),
     __metadata("design:type", String)
-], User.prototype, "b\u1EC9thday", void 0);
+], User.prototype, "birthday", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }) //0: Nam, 1: Nữ, 2: Khác
+    ,
+    __metadata("design:type", Number)
+], User.prototype, "gender", void 0);
 __decorate([
     sequelize_typescript_1.IsEmail,
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING, allowNull: false }),
@@ -67,6 +72,16 @@ __decorate([
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }),
     __metadata("design:type", String)
 ], User.prototype, "lastLogin", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }) //0: Admin, 1: Người dùng
+    ,
+    __metadata("design:type", Number)
+], User.prototype, "roleId", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER, defaultValue: 0 }) //0: Chưa xác thực, 1: Đã xác thực
+    ,
+    __metadata("design:type", Number)
+], User.prototype, "status", void 0);
 User = __decorate([
     (0, sequelize_typescript_1.Table)({
         tableName: 'users',

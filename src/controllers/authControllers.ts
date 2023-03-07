@@ -9,6 +9,10 @@ import { Request, Response } from 'express';
 import ValidationErrors from '../errors/ValidationErrors';
 import { sign } from '../utils/jwt';
 import { omit } from 'lodash';
+import { generateOTP, verifyOTP } from '../utils/otp';
+import { sendOTP } from '../helpers/mailHelper';
+import { registerUserTemplate, forgotPasswordMailTemplate } from '../helpers/mailTemplate';
+import { TITLE_MAIL_REGISTER, TITLE_MAIL_FORGETPASSWORD } from '../constants/index';
 
 const omitField = ['password'];
 
@@ -17,14 +21,33 @@ export const registerUser = async (req: Request, res: Response) => {
     const data = req.body;
 
     const userExist = await userExists({ email: data?.email });
+
     if (userExist) {
       res.status(400).json({
         success: false,
         message: 'Tài khoản đã tồn tại'
       });
     }
+
     const newUser = await createUser(data);
 
+    if (newUser) {
+      const otp = generateOTP(data?.email);
+
+      const sendOtpMail = await sendOTP(
+        data?.email,
+        otp,
+        TITLE_MAIL_REGISTER,
+        registerUserTemplate
+      );
+
+      if (!sendOtpMail) {
+        res.status(400).json({
+          success: false,
+          message: 'Có lỗi. Vui lòng thử lại'
+        });
+      }
+    }
     const userData = omit(newUser?.toJSON(), omitField);
     const accessToken = sign({ ...userData });
 
@@ -107,5 +130,114 @@ export const logoutUser = async (req: Request, res: Response) => {
   } catch (err) {
     console.log(err);
     throw new ValidationErrors('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
+  }
+};
+
+export const forgetPassword = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+
+    const findUser = await findOneUser({ email });
+    if (!findUser) {
+      res.status(400).json({
+        success: false,
+        message: 'Tài khoản không tồn tại'
+      });
+    }
+
+    const otp = generateOTP(email);
+
+    const sendOtpMail = await sendOTP(
+      email,
+      otp,
+      TITLE_MAIL_FORGETPASSWORD,
+      forgotPasswordMailTemplate
+    );
+
+    if (!sendOtpMail) {
+      res.status(400).json({
+        success: false,
+        message: 'Có lỗi. Vui lòng thử lại'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Chúng tôi đã gửi mã OTP tới email của bạn. Vui lòng kiểm tra và nhập chính xác '
+    });
+  } catch {
+    throw new ValidationErrors('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
+  }
+};
+
+export const resetPassword = async (req: Request, res: Response) => {
+  try {
+    const { password, email, otp } = req.body;
+
+    const findUser = await findOneUser({ email });
+    if (!findUser) {
+      res.status(400).json({
+        success: false,
+        message: 'Tài khoản không tồn tại'
+      });
+    }
+
+    const verify = verifyOTP(email, otp);
+
+    if (!verify) {
+      res.status(400).json({
+        success: false,
+        message: 'Mã OTP sai vui lòng kiểm tra lại mã'
+      });
+    }
+
+    const updatePassword = await updateUserById({ password }, findUser?.id);
+
+    if (!updatePassword) {
+      res.status(400).json({
+        success: false,
+        message: 'Có Lỗi. Vui lòng thử lại'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Thay đổi mật khẩu thành công'
+    });
+  } catch {
+    throw new ValidationErrors('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
+  }
+};
+
+export const verifyOtpRegister = async (req: Request, res: Response) => {
+  try {
+    const { userId, otp } = req.body;
+
+    const user = await findOneUser({ id: userId });
+
+    const verify = verifyOTP(user?.email, otp);
+
+    if (!verify) {
+      res.status(400).json({
+        success: false,
+        message: 'Mã OTP sai vui lòng kiểm tra lại mã'
+      });
+    }
+
+    const updateStatusUser = await updateUserById({ status: 1 }, userId);
+
+    if (!updateStatusUser) {
+      res.status(400).json({
+        success: false,
+        message: 'Có Lỗi. Vui lòng thử lại'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Mã OTP chính xác'
+    });
+  } catch {
+    throw new ValidationErrors('Có lỗi xảy ra. Vui lòng thử lại', 'errors');
   }
 };

@@ -6,6 +6,16 @@ import ValidationErrors from '../errors/ValidationErrors';
 import { compareSync } from '../utils/encrypt';
 
 export const createUser = async (payload: any) => {
+  const gender = payload?.gender;
+
+  if (gender.toUpperCase() === 'NỮ') {
+    payload.gender = 1;
+  } else if (gender.toUpperCase() === 'NAM') {
+    payload.gender = 0;
+  } else {
+    payload.gender = 2;
+  }
+
   payload.fullName = payload?.firstName + ' ' + payload?.lastName;
   payload.password = encryptSync(payload.password);
   const user = await User.create(payload);

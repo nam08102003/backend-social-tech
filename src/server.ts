@@ -42,7 +42,7 @@ const storage = multer.diskStorage({
   }
 });
 
-// const upload = multer({ storage });
+const upload = multer({ storage });
 
 // ROUTE API
 server.use('/auth', routeAuth);
@@ -60,6 +60,7 @@ initDB()
     });
   })
   .catch((err) => {
+    console.log(err);
     if (err) throw new ValidationErrors('Errors', 'Errors');
   });
 

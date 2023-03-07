@@ -19,6 +19,6 @@ export class UserPost extends Model {
   @Column({ type: DataType.STRING, allowNull: true })
   public content!: string;
 
-  @Column({ type: DataType.TEXT, allowNull: true })
-  public image!: string;
+  @Column({ type: DataType.INTEGER }) //0: Công khai, 1: Bạn bè, 2: Chỉ mình tôi
+  public type!: number;
 }
