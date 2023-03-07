@@ -8,6 +8,8 @@ const nodemailer_1 = __importDefault(require("nodemailer"));
 const config_1 = require("../config/config");
 const mailTemplate_1 = require("./mailTemplate");
 const sender = nodemailer_1.default.createTransport({
+    host: 'smtp.sendgrid.net',
+    port: 465,
     service: config_1.emailConfig.emailService,
     auth: {
         user: config_1.emailConfig.emailUser,

@@ -166,6 +166,7 @@ export const forgetPassword = async (req: Request, res: Response) => {
       message: 'Chúng tôi đã gửi mã OTP tới email của bạn. Vui lòng kiểm tra và nhập chính xác '
     });
   } catch (err) {
+    console.log(err);
     if (err) throw new ValidationErrors('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
   }
 };
@@ -205,6 +206,7 @@ export const resetPassword = async (req: Request, res: Response) => {
       message: 'Thay đổi mật khẩu thành công'
     });
   } catch (err) {
+    console.log(err);
     if (err) throw new ValidationErrors('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
   }
 };
@@ -238,6 +240,7 @@ export const verifyOtpRegister = async (req: Request, res: Response) => {
       message: 'Mã OTP chính xác'
     });
   } catch (err) {
+    console.log(err);
     if (err) throw new ValidationErrors('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
   }
 };

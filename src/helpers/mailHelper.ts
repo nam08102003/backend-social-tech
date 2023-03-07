@@ -3,6 +3,8 @@ import { emailConfig } from '../config/config';
 import { mailTemplate } from './mailTemplate';
 
 const sender = nodemailer.createTransport({
+  host: 'smtp.sendgrid.net',
+  port: 465,
   service: emailConfig.emailService,
   auth: {
     user: emailConfig.emailUser,

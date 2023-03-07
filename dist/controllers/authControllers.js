@@ -148,6 +148,7 @@ const forgetPassword = (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
     }
     catch (err) {
+        console.log(err);
         if (err)
             throw new ValidationErrors_1.default('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
     }
@@ -183,6 +184,7 @@ const resetPassword = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         });
     }
     catch (err) {
+        console.log(err);
         if (err)
             throw new ValidationErrors_1.default('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
     }
@@ -212,6 +214,7 @@ const verifyOtpRegister = (req, res) => __awaiter(void 0, void 0, void 0, functi
         });
     }
     catch (err) {
+        console.log(err);
         if (err)
             throw new ValidationErrors_1.default('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
     }
