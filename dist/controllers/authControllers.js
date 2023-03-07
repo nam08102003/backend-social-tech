@@ -119,7 +119,8 @@ const logoutUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
     catch (err) {
         console.log(err);
-        throw new ValidationErrors_1.default('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
+        if (err)
+            throw new ValidationErrors_1.default('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
     }
 });
 exports.logoutUser = logoutUser;
@@ -146,8 +147,9 @@ const forgetPassword = (req, res) => __awaiter(void 0, void 0, void 0, function*
             message: 'Chúng tôi đã gửi mã OTP tới email của bạn. Vui lòng kiểm tra và nhập chính xác '
         });
     }
-    catch (_a) {
-        throw new ValidationErrors_1.default('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
+    catch (err) {
+        if (err)
+            throw new ValidationErrors_1.default('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
     }
 });
 exports.forgetPassword = forgetPassword;
@@ -180,8 +182,9 @@ const resetPassword = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             message: 'Thay đổi mật khẩu thành công'
         });
     }
-    catch (_b) {
-        throw new ValidationErrors_1.default('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
+    catch (err) {
+        if (err)
+            throw new ValidationErrors_1.default('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
     }
 });
 exports.resetPassword = resetPassword;
@@ -208,8 +211,9 @@ const verifyOtpRegister = (req, res) => __awaiter(void 0, void 0, void 0, functi
             message: 'Mã OTP chính xác'
         });
     }
-    catch (_c) {
-        throw new ValidationErrors_1.default('Có lỗi xảy ra. Vui lòng thử lại', 'errors');
+    catch (err) {
+        if (err)
+            throw new ValidationErrors_1.default('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
     }
 });
 exports.verifyOtpRegister = verifyOtpRegister;
