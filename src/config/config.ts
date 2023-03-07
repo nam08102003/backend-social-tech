@@ -16,3 +16,15 @@ export const jwtConfig = {
   expiry: process.env.TOKEN_EXPIRY_HOUR,
   saltRound: 4
 };
+
+export const emailConfig = {
+  emailService: process.env.EMAIL_SERVICE,
+  emailUser: process.env.EMAIL_USER,
+  emailPassword: process.env.EMAIL_PASSWORD,
+  emailFrom: process.env.EMAIL_FROM
+};
+
+export const otpConfig = {
+  otpExpiry: process.env.OTP_EXPIRY_MIN,
+  otpSecret: process.env.OTP_SECRET
+};

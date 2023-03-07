@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.jwtConfig = exports.dbConfig = void 0;
+exports.otpConfig = exports.emailConfig = exports.jwtConfig = exports.dbConfig = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 exports.dbConfig = {
@@ -17,5 +17,15 @@ exports.jwtConfig = {
     secret: process.env.SECRET,
     expiry: process.env.TOKEN_EXPIRY_HOUR,
     saltRound: 4
+};
+exports.emailConfig = {
+    emailService: process.env.EMAIL_SERVICE,
+    emailUser: process.env.EMAIL_USER,
+    emailPassword: process.env.EMAIL_PASSWORD,
+    emailFrom: process.env.EMAIL_FROM
+};
+exports.otpConfig = {
+    otpExpiry: process.env.OTP_EXPIRY_MIN,
+    otpSecret: process.env.OTP_SECRET
 };
 //# sourceMappingURL=config.js.map

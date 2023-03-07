@@ -8,8 +8,6 @@ import { compareSync } from '../utils/encrypt';
 export const createUser = async (payload: any) => {
   const gender = payload?.gender;
 
-  console.log(gender);
-
   if (gender.toUpperCase() === 'NỮ') {
     payload.gender = 1;
   } else if (gender.toUpperCase() === 'NAM') {

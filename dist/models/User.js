@@ -77,6 +77,11 @@ __decorate([
     ,
     __metadata("design:type", Number)
 ], User.prototype, "roleId", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER, defaultValue: 0 }) //0: Chưa xác thực, 1: Đã xác thực
+    ,
+    __metadata("design:type", Number)
+], User.prototype, "status", void 0);
 User = __decorate([
     (0, sequelize_typescript_1.Table)({
         tableName: 'users',
