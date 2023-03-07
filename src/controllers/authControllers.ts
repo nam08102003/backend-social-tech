@@ -129,7 +129,7 @@ export const logoutUser = async (req: Request, res: Response) => {
     }
   } catch (err) {
     console.log(err);
-    throw new ValidationErrors('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
+    if (err) throw new ValidationErrors('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
   }
 };
 
@@ -165,8 +165,8 @@ export const forgetPassword = async (req: Request, res: Response) => {
       success: true,
       message: 'Chúng tôi đã gửi mã OTP tới email của bạn. Vui lòng kiểm tra và nhập chính xác '
     });
-  } catch {
-    throw new ValidationErrors('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
+  } catch (err) {
+    if (err) throw new ValidationErrors('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
   }
 };
 
@@ -204,8 +204,8 @@ export const resetPassword = async (req: Request, res: Response) => {
       success: true,
       message: 'Thay đổi mật khẩu thành công'
     });
-  } catch {
-    throw new ValidationErrors('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
+  } catch (err) {
+    if (err) throw new ValidationErrors('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
   }
 };
 
@@ -237,7 +237,7 @@ export const verifyOtpRegister = async (req: Request, res: Response) => {
       success: true,
       message: 'Mã OTP chính xác'
     });
-  } catch {
-    throw new ValidationErrors('Có lỗi xảy ra. Vui lòng thử lại', 'errors');
+  } catch (err) {
+    if (err) throw new ValidationErrors('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
   }
 };
