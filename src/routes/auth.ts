@@ -11,8 +11,8 @@ import {
 
 const router = Router();
 
-router.post('/login', loginUser);
 router.post('/me', getInfoUserByToken);
+router.post('/login', loginUser);
 
 router.post('/register', registerUser);
 router.post('/verify-otp-register', verifyOtpRegister);

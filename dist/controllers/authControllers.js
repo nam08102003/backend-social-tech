@@ -244,7 +244,8 @@ const getInfoUserByToken = (req, res) => __awaiter(void 0, void 0, void 0, funct
         res.status(200).json({
             success: true,
             message: 'Thành công',
-            result: userData
+            result: userData,
+            accessToken: accesstoken
         });
     }
     catch (err) {

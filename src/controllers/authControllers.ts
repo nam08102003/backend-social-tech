@@ -275,7 +275,8 @@ export const getInfoUserByToken = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: 'Thành công',
-      result: userData
+      result: userData,
+      accessToken: accesstoken
     });
   } catch (err) {
     console.log(err);
