@@ -22,7 +22,6 @@ const sender = nodemailer_1.default.createTransport({
     service: config_1.emailConfig.emailService,
     secure: true,
     auth: {
-        // type: 'OAuth2',
         user: config_1.emailConfig.emailUser,
         pass: config_1.emailConfig.emailPassword,
         clientId: config_1.emailConfig.clientId,
