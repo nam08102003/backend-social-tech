@@ -19,12 +19,14 @@ const mailTemplate_1 = require("./mailTemplate");
 const sender = nodemailer_1.default.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
-    secure: true,
     service: config_1.emailConfig.emailService,
+    secure: true,
     auth: {
-        type: 'OAUTH2',
+        // type: 'OAuth2',
         user: config_1.emailConfig.emailUser,
-        pass: config_1.emailConfig.emailPassword
+        pass: config_1.emailConfig.emailPassword,
+        clientId: config_1.emailConfig.clientId,
+        clientSecret: config_1.emailConfig.clientSecret
     }
 });
 const sendOTP = (email, otp, titleMail, template) => __awaiter(void 0, void 0, void 0, function* () {

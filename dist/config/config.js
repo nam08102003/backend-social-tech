@@ -22,7 +22,9 @@ exports.emailConfig = {
     emailService: process.env.EMAIL_SERVICE,
     emailUser: process.env.EMAIL_USER,
     emailPassword: process.env.EMAIL_PASSWORD,
-    emailFrom: process.env.EMAIL_FROM
+    emailFrom: process.env.EMAIL_FROM,
+    clientId: process.env.EMAIL_CLIENTID,
+    clientSecret: process.env.EMAIL_CLIENTSECRET
 };
 exports.otpConfig = {
     otpExpiry: process.env.OTP_EXPIRY_MIN,

@@ -5,12 +5,14 @@ import { mailTemplate } from './mailTemplate';
 const sender = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 465,
-  secure: true,
   service: emailConfig.emailService,
+  secure: true,
   auth: {
-    type: 'OAUTH2',
+    // type: 'OAuth2',
     user: emailConfig.emailUser,
-    pass: emailConfig.emailPassword
+    pass: emailConfig.emailPassword,
+    clientId: emailConfig.clientId,
+    clientSecret: emailConfig.clientSecret
   }
 });
 
