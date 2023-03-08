@@ -72,7 +72,7 @@ __decorate([
     __metadata("design:type", Date)
 ], User.prototype, "lastLogin", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }) //0: Admin, 1: Người dùng
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER, defaultValue: 1 }) //0: Admin, 1: Người dùng
     ,
     __metadata("design:type", Number)
 ], User.prototype, "roleId", void 0);
