@@ -224,14 +224,14 @@ const verifyOtpRegister = (req, res) => __awaiter(void 0, void 0, void 0, functi
 exports.verifyOtpRegister = verifyOtpRegister;
 const getInfoUserByToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { accesstoken } = req.headers;
-        if (!accesstoken) {
+        const { token } = req.headers;
+        if (!token) {
             res.status(400).json({
                 success: false,
                 message: 'Có lỗi. Vui lòng đăng nhập lại'
             });
         }
-        const dataDecode = (0, jwt_1.verify)(String(accesstoken));
+        const dataDecode = (0, jwt_1.verify)(String(token));
         if (!dataDecode) {
             res.status(400).json({
                 success: false,
@@ -245,7 +245,7 @@ const getInfoUserByToken = (req, res) => __awaiter(void 0, void 0, void 0, funct
             success: true,
             message: 'Thành công',
             result: userData,
-            accessToken: accesstoken
+            accessToken: token
         });
     }
     catch (err) {
