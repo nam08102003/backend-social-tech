@@ -35,13 +35,12 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "fullName", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }),
-    __metadata("design:type", String)
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.DATEONLY }),
+    __metadata("design:type", Date)
 ], User.prototype, "birthday", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }) //0: Nam, 1: Nữ, 2: Khác
-    ,
-    __metadata("design:type", Number)
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }),
+    __metadata("design:type", String)
 ], User.prototype, "gender", void 0);
 __decorate([
     sequelize_typescript_1.IsEmail,
@@ -69,8 +68,8 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "avatar", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }),
-    __metadata("design:type", String)
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.DATE }),
+    __metadata("design:type", Date)
 ], User.prototype, "lastLogin", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }) //0: Admin, 1: Người dùng

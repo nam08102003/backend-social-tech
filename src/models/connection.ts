@@ -29,7 +29,8 @@ const sequelize = new Sequelize({
   },
   define: {
     timestamps: false
-  }
+  },
+  timezone: '+07:00'
 });
 
 sequelize.addModels([

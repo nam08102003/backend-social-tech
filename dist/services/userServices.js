@@ -21,13 +21,10 @@ const encrypt_2 = require("../utils/encrypt");
 const createUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const gender = payload === null || payload === void 0 ? void 0 : payload.gender;
     if (gender.toUpperCase() === 'NỮ') {
-        payload.gender = 1;
+        payload.gender = 'Female';
     }
     else if (gender.toUpperCase() === 'NAM') {
-        payload.gender = 0;
-    }
-    else {
-        payload.gender = 2;
+        payload.gender = 'Male';
     }
     payload.fullName = (payload === null || payload === void 0 ? void 0 : payload.firstName) + ' ' + (payload === null || payload === void 0 ? void 0 : payload.lastName);
     payload.password = (0, encrypt_1.encryptSync)(payload.password);
