@@ -8,10 +8,14 @@ const sender = nodemailer.createTransport({
   service: emailConfig.emailService,
   secure: true,
   auth: {
+    // type: 'OAuth2',
     user: emailConfig.emailUser,
     pass: emailConfig.emailPassword,
     clientId: emailConfig.clientId,
-    clientSecret: emailConfig.clientSecret
+    clientSecret: emailConfig.clientSecret,
+    accessToken: emailConfig.accessToken,
+    refreshToken: emailConfig.refreshToken
+    // expires: emailConfig.expiry
   }
 });
 
