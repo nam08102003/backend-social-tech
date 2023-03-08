@@ -249,15 +249,15 @@ export const verifyOtpRegister = async (req: Request, res: Response) => {
 
 export const getInfoUserByToken = async (req: Request, res: Response) => {
   try {
-    const { accesstoken } = req.headers;
-    if (!accesstoken) {
+    const { token } = req.headers;
+    if (!token) {
       res.status(400).json({
         success: false,
         message: 'Có lỗi. Vui lòng đăng nhập lại'
       });
     }
 
-    const dataDecode = verify(String(accesstoken));
+    const dataDecode = verify(String(token));
 
     if (!dataDecode) {
       res.status(400).json({
@@ -276,7 +276,7 @@ export const getInfoUserByToken = async (req: Request, res: Response) => {
       success: true,
       message: 'Thành công',
       result: userData,
-      accessToken: accesstoken
+      accessToken: token
     });
   } catch (err) {
     console.log(err);

@@ -18,14 +18,21 @@ const connection_1 = require("../models/connection");
 const sequelize_1 = require("sequelize");
 const ValidationErrors_1 = __importDefault(require("../errors/ValidationErrors"));
 const encrypt_2 = require("../utils/encrypt");
+const moment_timezone_1 = __importDefault(require("moment-timezone"));
 const createUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const gender = payload === null || payload === void 0 ? void 0 : payload.gender;
+    let timeFormat = payload === null || payload === void 0 ? void 0 : payload.birthday;
+    if (timeFormat) {
+        timeFormat = (0, moment_timezone_1.default)(payload.birthday).tz('Asia/Jakarta').format();
+    }
     if (gender.toUpperCase() === 'NỮ') {
         payload.gender = 'Female';
     }
     else if (gender.toUpperCase() === 'NAM') {
         payload.gender = 'Male';
     }
+    console.log(timeFormat);
+    payload.birthday = timeFormat;
     payload.fullName = (payload === null || payload === void 0 ? void 0 : payload.firstName) + ' ' + (payload === null || payload === void 0 ? void 0 : payload.lastName);
     payload.password = (0, encrypt_1.encryptSync)(payload.password);
     const user = yield connection_1.User.create(payload);

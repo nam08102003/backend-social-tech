@@ -3,19 +3,24 @@ import { emailConfig } from '../config/config';
 import { mailTemplate } from './mailTemplate';
 
 const sender = nodemailer.createTransport({
-  host: 'smtp.ethereal.com',
-  port: 465,
-  service: emailConfig.emailService,
-  secure: true,
+  // host: '"smtp.mail.com"',
+  // port: 465,
+  // service: 'gmail',
+  // secure: true,
+  // auth: {
+  //   // type: 'OAuth2',
+  //   user: emailConfig.emailUser,
+  //   pass: emailConfig.emailPassword,
+  //   clientId: emailConfig.clientId,
+  //   clientSecret: emailConfig.clientSecret,
+  //   accessToken: emailConfig.accessToken,
+  //   refreshToken: emailConfig.refreshToken
+  // }
+  host: 'sandbox.smtp.mailtrap.io',
+  port: 2525,
   auth: {
-    // type: 'OAuth2',
-    user: emailConfig.emailUser,
-    pass: emailConfig.emailPassword,
-    clientId: emailConfig.clientId,
-    clientSecret: emailConfig.clientSecret,
-    accessToken: emailConfig.accessToken,
-    refreshToken: emailConfig.refreshToken
-    // expires: emailConfig.expiry
+    user: '74c3e7f86254a0',
+    pass: 'ec23f71bece647'
   }
 });
 

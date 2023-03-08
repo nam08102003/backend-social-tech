@@ -17,19 +17,24 @@ const nodemailer_1 = __importDefault(require("nodemailer"));
 const config_1 = require("../config/config");
 const mailTemplate_1 = require("./mailTemplate");
 const sender = nodemailer_1.default.createTransport({
-    host: 'smtp.ethereal.com',
-    port: 465,
-    service: config_1.emailConfig.emailService,
-    secure: true,
+    // host: '"smtp.mail.com"',
+    // port: 465,
+    // service: 'gmail',
+    // secure: true,
+    // auth: {
+    //   // type: 'OAuth2',
+    //   user: emailConfig.emailUser,
+    //   pass: emailConfig.emailPassword,
+    //   clientId: emailConfig.clientId,
+    //   clientSecret: emailConfig.clientSecret,
+    //   accessToken: emailConfig.accessToken,
+    //   refreshToken: emailConfig.refreshToken
+    // }
+    host: 'sandbox.smtp.mailtrap.io',
+    port: 2525,
     auth: {
-        // type: 'OAuth2',
-        user: config_1.emailConfig.emailUser,
-        pass: config_1.emailConfig.emailPassword,
-        clientId: config_1.emailConfig.clientId,
-        clientSecret: config_1.emailConfig.clientSecret,
-        accessToken: config_1.emailConfig.accessToken,
-        refreshToken: config_1.emailConfig.refreshToken
-        // expires: emailConfig.expiry
+        user: '74c3e7f86254a0',
+        pass: 'ec23f71bece647'
     }
 });
 const sendOTP = (email, otp, titleMail, template) => __awaiter(void 0, void 0, void 0, function* () {

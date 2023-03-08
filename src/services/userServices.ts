@@ -4,9 +4,15 @@ import { Op } from 'sequelize';
 import { size } from 'lodash';
 import ValidationErrors from '../errors/ValidationErrors';
 import { compareSync } from '../utils/encrypt';
+import moment from 'moment-timezone';
 
 export const createUser = async (payload: any) => {
   const gender = payload?.gender;
+  let timeFormat = payload?.birthday;
+
+  if (timeFormat) {
+    timeFormat = moment(payload.birthday).tz('Asia/Jakarta').format();
+  }
 
   if (gender.toUpperCase() === 'NỮ') {
     payload.gender = 'Female';
@@ -14,6 +20,9 @@ export const createUser = async (payload: any) => {
     payload.gender = 'Male';
   }
 
+  console.log(timeFormat);
+
+  payload.birthday = timeFormat;
   payload.fullName = payload?.firstName + ' ' + payload?.lastName;
   payload.password = encryptSync(payload.password);
   const user = await User.create(payload);
