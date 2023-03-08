@@ -9,11 +9,9 @@ export const createUser = async (payload: any) => {
   const gender = payload?.gender;
 
   if (gender.toUpperCase() === 'NỮ') {
-    payload.gender = 1;
+    payload.gender = 'Female';
   } else if (gender.toUpperCase() === 'NAM') {
-    payload.gender = 0;
-  } else {
-    payload.gender = 2;
+    payload.gender = 'Male';
   }
 
   payload.fullName = payload?.firstName + ' ' + payload?.lastName;

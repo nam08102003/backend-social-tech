@@ -22,11 +22,11 @@ export class User extends Model {
   @Column({ type: DataType.STRING, allowNull: true })
   public fullName!: string;
 
-  @Column({ type: DataType.STRING })
-  public birthday!: string;
+  @Column({ type: DataType.DATEONLY })
+  public birthday!: Date;
 
-  @Column({ type: DataType.INTEGER }) //0: Nam, 1: Nữ, 2: Khác
-  public gender!: number;
+  @Column({ type: DataType.STRING })
+  public gender!: string;
 
   @IsEmail
   @Column({ type: DataType.STRING, allowNull: false })
@@ -47,8 +47,8 @@ export class User extends Model {
   @Column({ type: DataType.TEXT })
   public avatar!: string;
 
-  @Column({ type: DataType.STRING })
-  public lastLogin!: string;
+  @Column({ type: DataType.DATE })
+  public lastLogin!: Date;
 
   @Column({ type: DataType.INTEGER }) //0: Admin, 1: Người dùng
   public roleId!: number;

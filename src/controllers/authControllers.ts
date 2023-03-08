@@ -7,12 +7,13 @@ import {
 } from '../services/userServices';
 import { Request, Response } from 'express';
 import ValidationErrors from '../errors/ValidationErrors';
-import { sign } from '../utils/jwt';
+import { sign, verify } from '../utils/jwt';
 import { omit } from 'lodash';
 import { generateOTP, verifyOTP } from '../utils/otp';
 import { sendOTP } from '../helpers/mailHelper';
 import { registerUserTemplate, forgotPasswordMailTemplate } from '../helpers/mailTemplate';
 import { TITLE_MAIL_REGISTER, TITLE_MAIL_FORGETPASSWORD } from '../constants/index';
+import moment from 'moment-timezone';
 
 const omitField = ['password'];
 
@@ -112,7 +113,8 @@ export const logoutUser = async (req: Request, res: Response) => {
       });
     }
 
-    const dateCurrent = new Date().toLocaleDateString();
+    const dateCurrent = moment().tz('Asia/Jakarta').format();
+    console.log(dateCurrent);
 
     const updateUser = await updateUserById({ lastLogin: dateCurrent }, userId);
 
@@ -238,6 +240,43 @@ export const verifyOtpRegister = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: 'Mã OTP chính xác'
+    });
+  } catch (err) {
+    console.log(err);
+    if (err) throw new ValidationErrors('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
+  }
+};
+
+export const getInfoUserByToken = async (req: Request, res: Response) => {
+  try {
+    const { accesstoken } = req.headers;
+    if (!accesstoken) {
+      res.status(400).json({
+        success: false,
+        message: 'Có lỗi. Vui lòng đăng nhập lại'
+      });
+    }
+
+    const dataDecode = verify(String(accesstoken));
+
+    if (!dataDecode) {
+      res.status(400).json({
+        success: false,
+        message: 'Có lỗi. Vui lòng đăng nhập lại'
+      });
+    }
+
+    const { id } = dataDecode?.decoded;
+
+    const dataUser = await findOneUser({ id });
+
+    const userData = omit(dataUser?.toJSON(), omitField);
+
+    res.status(200).json({
+      success: true,
+      message: 'Thành công',
+      result: userData,
+      accessToken: accesstoken
     });
   } catch (err) {
     console.log(err);

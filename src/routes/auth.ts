@@ -5,11 +5,13 @@ import {
   logoutUser,
   verifyOtpRegister,
   forgetPassword,
-  resetPassword
+  resetPassword,
+  getInfoUserByToken
 } from '../controllers/authControllers';
 
 const router = Router();
 
+router.post('/me', getInfoUserByToken);
 router.post('/login', loginUser);
 
 router.post('/register', registerUser);

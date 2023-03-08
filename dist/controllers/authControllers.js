@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.verifyOtpRegister = exports.resetPassword = exports.forgetPassword = exports.logoutUser = exports.loginUser = exports.registerUser = void 0;
+exports.getInfoUserByToken = exports.verifyOtpRegister = exports.resetPassword = exports.forgetPassword = exports.logoutUser = exports.loginUser = exports.registerUser = void 0;
 const userServices_1 = require("../services/userServices");
 const ValidationErrors_1 = __importDefault(require("../errors/ValidationErrors"));
 const jwt_1 = require("../utils/jwt");
@@ -21,6 +21,7 @@ const otp_1 = require("../utils/otp");
 const mailHelper_1 = require("../helpers/mailHelper");
 const mailTemplate_1 = require("../helpers/mailTemplate");
 const index_1 = require("../constants/index");
+const moment_timezone_1 = __importDefault(require("moment-timezone"));
 const omitField = ['password'];
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -102,7 +103,8 @@ const logoutUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 message: 'Tài khoản không tồn tại'
             });
         }
-        const dateCurrent = new Date().toLocaleDateString();
+        const dateCurrent = (0, moment_timezone_1.default)().tz('Asia/Jakarta').format();
+        console.log(dateCurrent);
         const updateUser = yield (0, userServices_1.updateUserById)({ lastLogin: dateCurrent }, userId);
         if (updateUser) {
             res.status(200).json({
@@ -220,4 +222,37 @@ const verifyOtpRegister = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.verifyOtpRegister = verifyOtpRegister;
+const getInfoUserByToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { accesstoken } = req.headers;
+        if (!accesstoken) {
+            res.status(400).json({
+                success: false,
+                message: 'Có lỗi. Vui lòng đăng nhập lại'
+            });
+        }
+        const dataDecode = (0, jwt_1.verify)(String(accesstoken));
+        if (!dataDecode) {
+            res.status(400).json({
+                success: false,
+                message: 'Có lỗi. Vui lòng đăng nhập lại'
+            });
+        }
+        const { id } = dataDecode === null || dataDecode === void 0 ? void 0 : dataDecode.decoded;
+        const dataUser = yield (0, userServices_1.findOneUser)({ id });
+        const userData = (0, lodash_1.omit)(dataUser === null || dataUser === void 0 ? void 0 : dataUser.toJSON(), omitField);
+        res.status(200).json({
+            success: true,
+            message: 'Thành công',
+            result: userData,
+            accessToken: accesstoken
+        });
+    }
+    catch (err) {
+        console.log(err);
+        if (err)
+            throw new ValidationErrors_1.default('Có lỗi xảy ra. Vui lòng thử lại.', 'errors');
+    }
+});
+exports.getInfoUserByToken = getInfoUserByToken;
 //# sourceMappingURL=authControllers.js.map

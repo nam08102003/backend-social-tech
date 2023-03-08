@@ -1,6 +1,10 @@
 import { jwtConfig } from '../config/config';
-
 import jwt from 'jsonwebtoken';
+
+interface JwtPayload {
+  id: string;
+  email: any;
+}
 
 export const sign = (payload: any, options = { expiresIn: jwtConfig.expiry + 'h' }) => {
   return jwt.sign(payload, jwtConfig.secret, options);
@@ -8,7 +12,7 @@ export const sign = (payload: any, options = { expiresIn: jwtConfig.expiry + 'h'
 
 export const verify = (token: string) => {
   try {
-    const decoded = jwt.verify(token, jwtConfig.secret);
+    const decoded = jwt.verify(token, jwtConfig.secret) as JwtPayload;
     return { valid: true, expired: false, decoded };
   } catch (error) {
     console.log('token', token, { error });

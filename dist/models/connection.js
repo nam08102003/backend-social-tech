@@ -55,7 +55,8 @@ const sequelize = new sequelize_typescript_1.Sequelize({
     },
     define: {
         timestamps: false
-    }
+    },
+    timezone: '+07:00'
 });
 sequelize.addModels([
     User_1.User,

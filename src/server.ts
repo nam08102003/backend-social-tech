@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import 'reflect-metadata';
 import bodyParser from 'body-parser';
@@ -22,6 +22,17 @@ const port = process.env.PORT || 6868;
 if (process.env.NODE_ENV === 'development') {
   server.use('*', errorHandler);
 }
+
+server.use(function (req: Request, res: Response, next: NextFunction) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control, Authorization'
+  );
+  res.setHeader('Access-Control-Allow-Credentials', 1);
+  next();
+});
 
 server.use(express.json());
 server.use(helmet());
