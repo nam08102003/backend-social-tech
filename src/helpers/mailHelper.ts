@@ -1,12 +1,12 @@
-import nodemailer from 'nodemailer';
+import * as nodemailer from 'nodemailer';
 import { emailConfig } from '../config/config';
 import { mailTemplate } from './mailTemplate';
 
 const sender = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
+  host: 'smtp.ethereal.com',
+  port: 587,
   service: emailConfig.emailService,
-  secure: true,
+  secure: false,
   auth: {
     // type: 'OAuth2',
     user: emailConfig.emailUser,
