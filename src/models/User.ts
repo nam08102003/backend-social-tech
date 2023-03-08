@@ -50,7 +50,7 @@ export class User extends Model {
   @Column({ type: DataType.DATE })
   public lastLogin!: Date;
 
-  @Column({ type: DataType.INTEGER }) //0: Admin, 1: Người dùng
+  @Column({ type: DataType.INTEGER, defaultValue: 1 }) //0: Admin, 1: Người dùng
   public roleId!: number;
 
   @Column({ type: DataType.INTEGER, defaultValue: 0 }) //0: Chưa xác thực, 1: Đã xác thực
