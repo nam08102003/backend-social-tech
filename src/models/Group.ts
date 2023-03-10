@@ -6,18 +6,18 @@ import { Table, Column, DataType, Model } from 'sequelize-typescript';
 })
 export class Group extends Model {
   @Column({
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.UUID,
     allowNull: false,
-    autoIncrement: true,
+    defaultValue: DataType.UUIDV4,
     primaryKey: true
   })
-  public id!: number;
+  public id!: string;
 
-  @Column({ type: DataType.INTEGER }) //id người tạo
-  public createdBy!: number;
+  @Column({ type: DataType.STRING }) //id người tạo
+  public createdBy!: string;
 
-  @Column({ type: DataType.INTEGER }) //id người sửa cuối cùng
-  public updatedBy!: number;
+  @Column({ type: DataType.STRING }) //id người sửa cuối cùng
+  public updatedBy!: string;
 
   @Column({ type: DataType.STRING, allowNull: false })
   public title!: string;
@@ -28,12 +28,15 @@ export class Group extends Model {
   @Column({ type: DataType.STRING, allowNull: false }) //Dùng cho việc tạo 1 url duy nhất
   public slug!: string;
 
-  @Column({ type: DataType.TEXT }) //Mô tả trang group
+  @Column({ type: DataType.STRING }) //Mô tả trang group
   public description!: string;
 
   @Column({ type: DataType.STRING }) // Mới, Đang hoạt động, Đã khóa
   public status!: string;
 
-  @Column({ type: DataType.TEXT })
-  public content!: string;
+  @Column({ type: DataType.STRING }) // Mới, Đang hoạt động, Đã khóa
+  public limit!: string;
+
+  @Column({ type: DataType.STRING })
+  public type!: string;
 }

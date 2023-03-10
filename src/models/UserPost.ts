@@ -6,19 +6,22 @@ import { Table, Column, DataType, Model } from 'sequelize-typescript';
 })
 export class UserPost extends Model {
   @Column({
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.UUID,
     allowNull: false,
-    autoIncrement: true,
+    defaultValue: DataType.UUIDV4,
     primaryKey: true
   })
-  public id!: number;
+  public id!: string;
 
-  @Column({ type: DataType.INTEGER })
-  public userId!: number;
+  @Column({ type: DataType.STRING })
+  public userId!: string;
 
   @Column({ type: DataType.STRING, allowNull: true })
   public content!: string;
 
   @Column({ type: DataType.STRING }) //Công khai, Bạn bè, Chỉ mình tôi
   public type!: string;
+
+  @Column({ type: DataType.DATE })
+  public timePost!: Date;
 }

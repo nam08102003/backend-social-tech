@@ -6,15 +6,15 @@ import { Table, Column, DataType, Model } from 'sequelize-typescript';
 })
 export class UserFollower extends Model {
   @Column({
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.UUID,
     allowNull: false,
-    autoIncrement: true,
+    defaultValue: DataType.UUIDV4,
     primaryKey: true
   })
-  public id!: number;
+  public id!: string;
 
-  @Column({ type: DataType.INTEGER })
-  public userId!: number;
+  @Column({ type: DataType.STRING })
+  public userId!: string;
 
   @Column({ type: DataType.INTEGER, allowNull: true })
   public followerId!: number;

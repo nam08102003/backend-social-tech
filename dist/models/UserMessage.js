@@ -15,23 +15,23 @@ let UserMessage = class UserMessage extends sequelize_typescript_1.Model {
 };
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.INTEGER.UNSIGNED,
+        type: sequelize_typescript_1.DataType.UUID,
         allowNull: false,
-        autoIncrement: true,
+        defaultValue: sequelize_typescript_1.DataType.UUIDV4,
         primaryKey: true
     }),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], UserMessage.prototype, "id", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }),
-    __metadata("design:type", Number)
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }),
+    __metadata("design:type", String)
 ], UserMessage.prototype, "userId", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER, allowNull: true }),
-    __metadata("design:type", Number)
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }),
+    __metadata("design:type", String)
 ], UserMessage.prototype, "friendId", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.TEXT, allowNull: true }),
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING, allowNull: true }),
     __metadata("design:type", String)
 ], UserMessage.prototype, "message", void 0);
 __decorate([

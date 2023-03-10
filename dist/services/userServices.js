@@ -16,14 +16,16 @@ exports.deleteUserById = exports.updateUserById = exports.findOneUser = exports.
 const encrypt_1 = require("../utils/encrypt");
 const connection_1 = require("../models/connection");
 const sequelize_1 = require("sequelize");
+const lodash_1 = require("lodash");
 const ValidationErrors_1 = __importDefault(require("../errors/ValidationErrors"));
 const encrypt_2 = require("../utils/encrypt");
 const moment_timezone_1 = __importDefault(require("moment-timezone"));
 const createUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const gender = payload === null || payload === void 0 ? void 0 : payload.gender;
-    let timeFormat = payload === null || payload === void 0 ? void 0 : payload.birthday;
-    if (timeFormat) {
-        timeFormat = (0, moment_timezone_1.default)(payload.birthday).tz('Asia/Jakarta').format();
+    let timeParse;
+    if (payload === null || payload === void 0 ? void 0 : payload.birthday) {
+        const timeFormat = (0, moment_timezone_1.default)(payload.birthday).tz('Asia/Jakarta').format();
+        timeParse = new Date(Date.parse(timeFormat));
     }
     if (gender.toUpperCase() === 'NỮ') {
         payload.gender = 'Female';
@@ -31,7 +33,7 @@ const createUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     else if (gender.toUpperCase() === 'NAM') {
         payload.gender = 'Male';
     }
-    payload.birthday = timeFormat;
+    payload.birthday = timeParse;
     payload.fullName = (payload === null || payload === void 0 ? void 0 : payload.firstName) + ' ' + (payload === null || payload === void 0 ? void 0 : payload.lastName);
     payload.password = (0, encrypt_1.encryptSync)(payload.password);
     const user = yield connection_1.User.create(payload);
@@ -106,7 +108,7 @@ const updateUserById = (data, userId) => {
     if (!data && !userId) {
         throw new ValidationErrors_1.default('Vui lòng nhập dữ liệu cần thay đổi và idUser', 'errors');
     }
-    if (userId && isNaN(userId)) {
+    if (userId && (0, lodash_1.isString)(userId)) {
         throw new ValidationErrors_1.default('idUser không hợp lệ', 'errors');
     }
     if (data.id || userId) {
@@ -124,7 +126,7 @@ const deleteUserById = (userId) => {
     if (!userId) {
         throw new ValidationErrors_1.default('Please user id to delete', 'User');
     }
-    if (userId && isNaN(userId)) {
+    if (userId && (0, lodash_1.isString)(userId)) {
         throw new ValidationErrors_1.default('Invalid user id', 'User');
     }
     return connection_1.User.destroy({

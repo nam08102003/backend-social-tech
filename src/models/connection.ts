@@ -13,6 +13,14 @@ import { GroupMessage } from './GroupMessage';
 import { GroupPost } from './GroupPost';
 import { ProfileGroup } from './ProfileGroup';
 import { ProfileUser } from './ProfileUser';
+import { UserContact } from './UserContact';
+import { UserEvent } from './UserEvent';
+import { UserFavorite } from './UserFavorite';
+import { UserSchool } from './UserSchool';
+import { UserWork } from './UserWork';
+import { CommentPost } from './CommentPost';
+import { GroupEvent } from './GroupEvent';
+import { LikePost } from './LikePost';
 
 const sequelize = new Sequelize({
   host: dbConfig?.host,
@@ -45,7 +53,15 @@ sequelize.addModels([
   GroupMessage,
   GroupPost,
   ProfileGroup,
-  ProfileUser
+  ProfileUser,
+  UserContact,
+  UserEvent,
+  UserFavorite,
+  UserSchool,
+  UserWork,
+  LikePost,
+  CommentPost,
+  GroupEvent
 ]);
 
 export const initDB = async () => {
@@ -65,5 +81,13 @@ export {
   GroupMessage,
   GroupPost,
   ProfileGroup,
-  ProfileUser
+  ProfileUser,
+  UserContact,
+  UserEvent,
+  UserFavorite,
+  UserSchool,
+  UserWork,
+  LikePost,
+  CommentPost,
+  GroupEvent
 };

@@ -6,23 +6,23 @@ import { Table, Column, DataType, Model } from 'sequelize-typescript';
 })
 export class UserFriend extends Model {
   @Column({
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.UUID,
     allowNull: false,
-    autoIncrement: true,
+    defaultValue: DataType.UUIDV4,
     primaryKey: true
   })
-  public id!: number;
+  public id!: string;
 
-  @Column({ type: DataType.INTEGER })
-  public userId!: number;
+  @Column({ type: DataType.STRING })
+  public userId!: string;
 
-  @Column({ type: DataType.INTEGER })
-  public friendId!: number;
+  @Column({ type: DataType.STRING })
+  public friendId!: string;
 
-  @Column({ type: DataType.STRING, defaultValue: 0 })
+  @Column({ type: DataType.STRING })
   public type!: string;
 
-  @Column({ type: DataType.STRING, defaultValue: 0 })
+  @Column({ type: DataType.STRING })
   public status!: string;
 
   @Column({ type: DataType.STRING, allowNull: true })

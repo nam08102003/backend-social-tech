@@ -15,22 +15,37 @@ let ProfileGroup = class ProfileGroup extends sequelize_typescript_1.Model {
 };
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.INTEGER.UNSIGNED,
+        type: sequelize_typescript_1.DataType.UUID,
         allowNull: false,
-        autoIncrement: true,
+        defaultValue: sequelize_typescript_1.DataType.UUIDV4,
         primaryKey: true
     }),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], ProfileGroup.prototype, "id", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }),
-    __metadata("design:type", Number)
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }),
+    __metadata("design:type", String)
 ], ProfileGroup.prototype, "groupId", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }) //0: Công khai, 1: Thành viên, 2: Quản trị
-    ,
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }),
     __metadata("design:type", String)
 ], ProfileGroup.prototype, "type", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }),
+    __metadata("design:type", String)
+], ProfileGroup.prototype, "address", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.TIME }),
+    __metadata("design:type", Date)
+], ProfileGroup.prototype, "timeOpen", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.TIME }),
+    __metadata("design:type", Date)
+], ProfileGroup.prototype, "timeClose", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }),
+    __metadata("design:type", String)
+], ProfileGroup.prototype, "field", void 0);
 ProfileGroup = __decorate([
     (0, sequelize_typescript_1.Table)({
         tableName: 'profile_group',

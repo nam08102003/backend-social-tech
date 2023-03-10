@@ -15,21 +15,21 @@ let GroupPost = class GroupPost extends sequelize_typescript_1.Model {
 };
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.INTEGER.UNSIGNED,
+        type: sequelize_typescript_1.DataType.UUID,
         allowNull: false,
-        autoIncrement: true,
+        defaultValue: sequelize_typescript_1.DataType.UUIDV4,
         primaryKey: true
     }),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], GroupPost.prototype, "id", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }),
-    __metadata("design:type", Number)
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }),
+    __metadata("design:type", String)
 ], GroupPost.prototype, "groupId", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }) // Id người đăng
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }) // Id người đăng
     ,
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], GroupPost.prototype, "UserId", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }),
@@ -44,6 +44,11 @@ __decorate([
     ,
     __metadata("design:type", String)
 ], GroupPost.prototype, "type", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.DATE }) //0: Công khai, 1: Thành viên, 2: Quản trị
+    ,
+    __metadata("design:type", Date)
+], GroupPost.prototype, "timePost", void 0);
 GroupPost = __decorate([
     (0, sequelize_typescript_1.Table)({
         tableName: 'group_post',

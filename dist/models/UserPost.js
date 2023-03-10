@@ -15,16 +15,16 @@ let UserPost = class UserPost extends sequelize_typescript_1.Model {
 };
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.INTEGER.UNSIGNED,
+        type: sequelize_typescript_1.DataType.UUID,
         allowNull: false,
-        autoIncrement: true,
+        defaultValue: sequelize_typescript_1.DataType.UUIDV4,
         primaryKey: true
     }),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], UserPost.prototype, "id", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }),
-    __metadata("design:type", Number)
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }),
+    __metadata("design:type", String)
 ], UserPost.prototype, "userId", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING, allowNull: true }),
@@ -35,6 +35,10 @@ __decorate([
     ,
     __metadata("design:type", String)
 ], UserPost.prototype, "type", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.DATE }),
+    __metadata("design:type", Date)
+], UserPost.prototype, "timePost", void 0);
 UserPost = __decorate([
     (0, sequelize_typescript_1.Table)({
         tableName: 'user_post',

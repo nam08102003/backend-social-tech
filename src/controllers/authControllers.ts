@@ -25,6 +25,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
     if (userExist) {
       res.status(400).json({
+        status: 400,
         success: false,
         message: 'Tài khoản đã tồn tại'
       });
@@ -43,7 +44,8 @@ export const registerUser = async (req: Request, res: Response) => {
       );
 
       if (!sendOtpMail) {
-        res.status(400).json({
+        res.status(500).json({
+          status: 500,
           success: false,
           message: 'Có lỗi. Vui lòng thử lại'
         });
@@ -52,7 +54,8 @@ export const registerUser = async (req: Request, res: Response) => {
     const userData = omit(newUser?.toJSON(), omitField);
     const accessToken = sign({ ...userData });
 
-    res.status(200).json({
+    res.status(201).json({
+      status: 201,
       success: true,
       message: 'Đăng ký tài khoản thành công',
       accessToken,
@@ -71,7 +74,8 @@ export const loginUser = async (req: Request, res: Response) => {
     const userExist = await findOneUser({ email });
 
     if (!userExist) {
-      res.status(400).json({
+      res.status(403).json({
+        status: 403,
         success: false,
         message: 'Tài khoản không tồn tại. Vui lòng đăng ký tài khoản'
       });
@@ -79,7 +83,8 @@ export const loginUser = async (req: Request, res: Response) => {
     const validatePw = await validatePassword(email, password);
 
     if (!validatePw) {
-      res.status(400).json({
+      res.status(401).json({
+        status: 401,
         success: false,
         message: 'Sai mật khẩu'
       });
@@ -88,7 +93,8 @@ export const loginUser = async (req: Request, res: Response) => {
     const userData = omit(userExist?.toJSON(), omitField);
     const accessToken = sign({ ...userData });
 
-    res.status(200).json({
+    res.status(201).json({
+      status: 201,
       success: true,
       message: 'Đăng nhập thành công',
       accessToken,
@@ -107,24 +113,27 @@ export const logoutUser = async (req: Request, res: Response) => {
     const userExist = await findOneUser({ id: userId });
 
     if (!userExist) {
-      res.status(400).json({
+      res.status(403).json({
+        status: 403,
         success: false,
         message: 'Tài khoản không tồn tại'
       });
     }
 
     const dateCurrent = moment().tz('Asia/Jakarta').format();
-    console.log(dateCurrent);
+    const dateParse = new Date(Date.parse(dateCurrent));
 
-    const updateUser = await updateUserById({ lastLogin: dateCurrent }, userId);
+    const updateUser = await updateUserById({ lastLogin: dateParse }, userId);
 
     if (updateUser) {
-      res.status(200).json({
+      res.status(201).json({
+        status: 201,
         success: true,
         message: 'Đăng xuất thành công'
       });
     } else {
-      res.status(400).json({
+      res.status(500).json({
+        status: 500,
         success: false,
         message: 'Đăng xuất thất bại'
       });
@@ -141,7 +150,8 @@ export const forgetPassword = async (req: Request, res: Response) => {
 
     const findUser = await findOneUser({ email });
     if (!findUser) {
-      res.status(400).json({
+      res.status(403).json({
+        status: 403,
         success: false,
         message: 'Tài khoản không tồn tại'
       });
@@ -157,13 +167,15 @@ export const forgetPassword = async (req: Request, res: Response) => {
     );
 
     if (!sendOtpMail) {
-      res.status(400).json({
+      res.status(500).json({
+        status: 500,
         success: false,
         message: 'Có lỗi. Vui lòng thử lại'
       });
     }
 
-    res.status(200).json({
+    res.status(201).json({
+      status: 201,
       success: true,
       message: 'Chúng tôi đã gửi mã OTP tới email của bạn. Vui lòng kiểm tra và nhập chính xác '
     });
@@ -179,7 +191,8 @@ export const resetPassword = async (req: Request, res: Response) => {
 
     const findUser = await findOneUser({ email });
     if (!findUser) {
-      res.status(400).json({
+      res.status(403).json({
+        status: 403,
         success: false,
         message: 'Tài khoản không tồn tại'
       });
@@ -189,6 +202,7 @@ export const resetPassword = async (req: Request, res: Response) => {
 
     if (!verify) {
       res.status(400).json({
+        status: 400,
         success: false,
         message: 'Mã OTP sai vui lòng kiểm tra lại mã'
       });
@@ -197,13 +211,15 @@ export const resetPassword = async (req: Request, res: Response) => {
     const updatePassword = await updateUserById({ password }, findUser?.id);
 
     if (!updatePassword) {
-      res.status(400).json({
+      res.status(500).json({
+        status: 500,
         success: false,
         message: 'Có Lỗi. Vui lòng thử lại'
       });
     }
 
-    res.status(200).json({
+    res.status(201).json({
+      status: 201,
       success: true,
       message: 'Thay đổi mật khẩu thành công'
     });
@@ -223,6 +239,7 @@ export const verifyOtpRegister = async (req: Request, res: Response) => {
 
     if (!verify) {
       res.status(400).json({
+        status: 400,
         success: false,
         message: 'Mã OTP sai vui lòng kiểm tra lại mã'
       });
@@ -231,13 +248,15 @@ export const verifyOtpRegister = async (req: Request, res: Response) => {
     const updateStatusUser = await updateUserById({ status: 1 }, userId);
 
     if (!updateStatusUser) {
-      res.status(400).json({
+      res.status(500).json({
+        status: 500,
         success: false,
         message: 'Có Lỗi. Vui lòng thử lại'
       });
     }
 
-    res.status(200).json({
+    res.status(201).json({
+      status: 201,
       success: true,
       message: 'Mã OTP chính xác'
     });
@@ -252,6 +271,7 @@ export const getInfoUserByToken = async (req: Request, res: Response) => {
     const { token } = req.headers;
     if (!token) {
       res.status(400).json({
+        status: 400,
         success: false,
         message: 'Có lỗi. Vui lòng đăng nhập lại'
       });
@@ -260,7 +280,8 @@ export const getInfoUserByToken = async (req: Request, res: Response) => {
     const dataDecode = verify(String(token));
 
     if (!dataDecode) {
-      res.status(400).json({
+      res.status(500).json({
+        status: 500,
         success: false,
         message: 'Có lỗi. Vui lòng đăng nhập lại'
       });
@@ -272,7 +293,8 @@ export const getInfoUserByToken = async (req: Request, res: Response) => {
 
     const userData = omit(dataUser?.toJSON(), omitField);
 
-    res.status(200).json({
+    res.status(201).json({
+      status: 201,
       success: true,
       message: 'Thành công',
       result: userData,
