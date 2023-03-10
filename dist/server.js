@@ -24,16 +24,13 @@ const port = process.env.PORT || 6868;
 if (process.env.NODE_ENV === 'development') {
     server.use('*', errorHandler_1.default);
 }
-// server.use(function (req: Request, res: Response, next: NextFunction) {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-//   res.setHeader(
-//     'Access-Control-Allow-Headers',
-//     'Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control, Authorization'
-//   );
-//   res.setHeader('Access-Control-Allow-Credentials', 1);
-//   next();
-// });
+server.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 1);
+    next();
+});
 server.use(express_1.default.json());
 server.use((0, helmet_1.default)());
 server.use(helmet_1.default.crossOriginResourcePolicy({ policy: 'cross-origin' }));
