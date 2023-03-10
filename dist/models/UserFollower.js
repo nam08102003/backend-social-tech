@@ -35,9 +35,9 @@ __decorate([
     __metadata("design:type", String)
 ], UserFollower.prototype, "message", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.SMALLINT, allowNull: true, defaultValue: 0 }) // 0: Like, 1: Dislike, 2: Follow
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING, allowNull: true }) // Follow, Not Follow
     ,
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], UserFollower.prototype, "type", void 0);
 UserFollower = __decorate([
     (0, sequelize_typescript_1.Table)({

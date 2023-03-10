@@ -13,10 +13,10 @@ export class Group extends Model {
   })
   public id!: number;
 
-  @Column({ type: DataType.INTEGER })
+  @Column({ type: DataType.INTEGER }) //id người tạo
   public createdBy!: number;
 
-  @Column({ type: DataType.INTEGER })
+  @Column({ type: DataType.INTEGER }) //id người sửa cuối cùng
   public updatedBy!: number;
 
   @Column({ type: DataType.STRING, allowNull: false })
@@ -31,8 +31,8 @@ export class Group extends Model {
   @Column({ type: DataType.TEXT }) //Mô tả trang group
   public description!: string;
 
-  @Column({ type: DataType.INTEGER }) //0: Mới, 1: Chờ duyệt, 2: Đang hoạt động, 3: Đã khóa
-  public status!: number;
+  @Column({ type: DataType.STRING }) // Mới, Đang hoạt động, Đã khóa
+  public status!: string;
 
   @Column({ type: DataType.TEXT })
   public content!: string;

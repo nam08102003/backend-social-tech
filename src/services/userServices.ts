@@ -20,8 +20,6 @@ export const createUser = async (payload: any) => {
     payload.gender = 'Male';
   }
 
-  console.log(timeFormat);
-
   payload.birthday = timeFormat;
   payload.fullName = payload?.firstName + ' ' + payload?.lastName;
   payload.password = encryptSync(payload.password);

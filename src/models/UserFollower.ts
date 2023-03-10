@@ -22,6 +22,6 @@ export class UserFollower extends Model {
   @Column({ type: DataType.TEXT, allowNull: true })
   public message!: string;
 
-  @Column({ type: DataType.SMALLINT, allowNull: true, defaultValue: 0 }) // 0: Like, 1: Dislike, 2: Follow
-  public type!: number;
+  @Column({ type: DataType.STRING, allowNull: true }) // Follow, Not Follow
+  public type!: string;
 }

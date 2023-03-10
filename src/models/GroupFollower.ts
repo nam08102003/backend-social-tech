@@ -19,6 +19,6 @@ export class GroupFollower extends Model {
   @Column({ type: DataType.INTEGER })
   public UserId!: number;
 
-  @Column({ type: DataType.INTEGER }) //0: Thích, 1: Không thích, 2: Theo dõi
-  public type!: number;
+  @Column({ type: DataType.STRING }) // Thích, Không thích, Theo dõi
+  public type!: string;
 }

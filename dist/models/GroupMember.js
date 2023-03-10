@@ -36,9 +36,8 @@ __decorate([
     __metadata("design:type", Number)
 ], GroupMember.prototype, "roleId", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }) //0: Mới, 1: Bị từ chối, 2: Đang hoạt động, 3: Đang chờ duyệt, 4: Bị chặn,
-    ,
-    __metadata("design:type", Number)
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }),
+    __metadata("design:type", String)
 ], GroupMember.prototype, "status", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.TEXT }),

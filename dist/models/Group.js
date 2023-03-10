@@ -23,11 +23,13 @@ __decorate([
     __metadata("design:type", Number)
 ], Group.prototype, "id", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }),
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }) //id người tạo
+    ,
     __metadata("design:type", Number)
 ], Group.prototype, "createdBy", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }),
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }) //id người sửa cuối cùng
+    ,
     __metadata("design:type", Number)
 ], Group.prototype, "updatedBy", void 0);
 __decorate([
@@ -50,9 +52,9 @@ __decorate([
     __metadata("design:type", String)
 ], Group.prototype, "description", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }) //0: Mới, 1: Chờ duyệt, 2: Đang hoạt động, 3: Đã khóa
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }) // Mới, Đang hoạt động, Đã khóa
     ,
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], Group.prototype, "status", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.TEXT }),
