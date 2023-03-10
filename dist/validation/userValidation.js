@@ -9,10 +9,9 @@ exports.registerSchema = joi_1.default.object({
     firstName: joi_1.default.string().required(),
     lastName: joi_1.default.string().required(),
     email: joi_1.default.string().email().required(),
-    gender: joi_1.default.number().required(),
+    gender: joi_1.default.string().required(),
     birthday: joi_1.default.string().required(),
-    password: joi_1.default.string().min(6).required(),
-    confirm_password: joi_1.default.string().min(6)
+    password: joi_1.default.string().min(6).required()
 });
 exports.loginSchema = joi_1.default.object({
     email: joi_1.default.string().email().required(),
@@ -26,4 +25,4 @@ exports.updateSchema = joi_1.default.object({
     confirm_password: joi_1.default.string().min(6),
     intro: joi_1.default.string()
 });
-//# sourceMappingURL=users.js.map
+//# sourceMappingURL=userValidation.js.map

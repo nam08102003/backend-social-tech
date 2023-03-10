@@ -5,7 +5,7 @@ import {
   getListFriend,
   updateFriend,
   deleteFriend
-} from '../controllers/userController';
+} from '../controllers/friendController';
 
 const router = Router();
 

@@ -25,6 +25,6 @@ export class GroupPost extends Model {
   @Column({ type: DataType.STRING })
   public message!: string;
 
-  @Column({ type: DataType.INTEGER }) //0: Công khai, 1: Thành viên, 2: Quản trị
-  public type!: number;
+  @Column({ type: DataType.STRING }) //0: Công khai, 1: Thành viên, 2: Quản trị
+  public type!: string;
 }

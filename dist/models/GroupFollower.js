@@ -31,9 +31,9 @@ __decorate([
     __metadata("design:type", Number)
 ], GroupFollower.prototype, "UserId", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }) //0: Thích, 1: Không thích, 2: Theo dõi
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }) // Thích, Không thích, Theo dõi
     ,
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], GroupFollower.prototype, "type", void 0);
 GroupFollower = __decorate([
     (0, sequelize_typescript_1.Table)({

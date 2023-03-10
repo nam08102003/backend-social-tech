@@ -35,6 +35,9 @@ export class User extends Model {
   @Column({ type: DataType.STRING })
   public phone!: string;
 
+  @Column({ type: DataType.STRING })
+  public country!: string;
+
   @Column({ type: DataType.TEXT })
   public password!: string;
 

@@ -49,4 +49,4 @@ const updateFriend = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.updateFriend = updateFriend;
 const deleteFriend = (req, res) => __awaiter(void 0, void 0, void 0, function* () { });
 exports.deleteFriend = deleteFriend;
-//# sourceMappingURL=userController.js.map
+//# sourceMappingURL=friendController.js.map

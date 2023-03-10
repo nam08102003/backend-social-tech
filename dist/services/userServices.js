@@ -31,7 +31,6 @@ const createUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     else if (gender.toUpperCase() === 'NAM') {
         payload.gender = 'Male';
     }
-    console.log(timeFormat);
     payload.birthday = timeFormat;
     payload.fullName = (payload === null || payload === void 0 ? void 0 : payload.firstName) + ' ' + (payload === null || payload === void 0 ? void 0 : payload.lastName);
     payload.password = (0, encrypt_1.encryptSync)(payload.password);

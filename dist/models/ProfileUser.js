@@ -27,9 +27,9 @@ __decorate([
     __metadata("design:type", Number)
 ], ProfileUser.prototype, "UserId", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }) //0: Công khai, 1: Bạn bè, 2: Chỉ mình tôi
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }) //0: Công khai, 1: Bạn bè, 2: Chỉ mình tôi
     ,
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], ProfileUser.prototype, "type", void 0);
 ProfileUser = __decorate([
     (0, sequelize_typescript_1.Table)({

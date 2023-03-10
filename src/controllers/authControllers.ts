@@ -15,7 +15,7 @@ import { registerUserTemplate, forgotPasswordMailTemplate } from '../helpers/mai
 import { TITLE_MAIL_REGISTER, TITLE_MAIL_FORGETPASSWORD } from '../constants/index';
 import moment from 'moment-timezone';
 
-const omitField = ['password'];
+const omitField = ['password', 'lastLogin', 'phone', 'country', 'birthday', 'gender', 'address'];
 
 export const registerUser = async (req: Request, res: Response) => {
   try {

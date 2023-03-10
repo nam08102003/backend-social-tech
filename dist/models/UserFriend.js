@@ -27,18 +27,16 @@ __decorate([
     __metadata("design:type", Number)
 ], UserFriend.prototype, "userId", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER, allowNull: true }),
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }),
     __metadata("design:type", Number)
 ], UserFriend.prototype, "friendId", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.SMALLINT, allowNull: true, defaultValue: 0 }) // 0: Normal, 1: Friendly, 2: Lover
-    ,
-    __metadata("design:type", Number)
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING, defaultValue: 0 }),
+    __metadata("design:type", String)
 ], UserFriend.prototype, "type", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.SMALLINT, allowNull: true, defaultValue: 0 }) // 0: New, 1: Rejected, 2: Active
-    ,
-    __metadata("design:type", Number)
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING, defaultValue: 0 }),
+    __metadata("design:type", String)
 ], UserFriend.prototype, "status", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING, allowNull: true }),
