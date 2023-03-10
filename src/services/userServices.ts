@@ -104,7 +104,7 @@ export const updateUserById = (data: any, userId: string) => {
   if (!data && !userId) {
     throw new ValidationErrors('Vui lòng nhập dữ liệu cần thay đổi và idUser', 'errors');
   }
-  if (userId && isString(userId)) {
+  if (userId && !isString(userId)) {
     throw new ValidationErrors('idUser không hợp lệ', 'errors');
   }
   if (data.id || userId) {
@@ -124,7 +124,7 @@ export const deleteUserById = (userId: string) => {
   if (!userId) {
     throw new ValidationErrors('Please user id to delete', 'User');
   }
-  if (userId && isString(userId)) {
+  if (userId && !isString(userId)) {
     throw new ValidationErrors('Invalid user id', 'User');
   }
 

@@ -22,7 +22,7 @@ const mailHelper_1 = require("../helpers/mailHelper");
 const mailTemplate_1 = require("../helpers/mailTemplate");
 const index_1 = require("../constants/index");
 const moment_timezone_1 = __importDefault(require("moment-timezone"));
-const omitField = ['password', 'lastLogin', 'phone', 'country', 'birthday', 'gender', 'address'];
+const omitField = ['password', 'phone', 'country', 'birthday', 'gender', 'address'];
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = req.body;

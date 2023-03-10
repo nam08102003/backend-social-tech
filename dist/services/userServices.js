@@ -108,7 +108,7 @@ const updateUserById = (data, userId) => {
     if (!data && !userId) {
         throw new ValidationErrors_1.default('Vui lòng nhập dữ liệu cần thay đổi và idUser', 'errors');
     }
-    if (userId && (0, lodash_1.isString)(userId)) {
+    if (userId && !(0, lodash_1.isString)(userId)) {
         throw new ValidationErrors_1.default('idUser không hợp lệ', 'errors');
     }
     if (data.id || userId) {
@@ -126,7 +126,7 @@ const deleteUserById = (userId) => {
     if (!userId) {
         throw new ValidationErrors_1.default('Please user id to delete', 'User');
     }
-    if (userId && (0, lodash_1.isString)(userId)) {
+    if (userId && !(0, lodash_1.isString)(userId)) {
         throw new ValidationErrors_1.default('Invalid user id', 'User');
     }
     return connection_1.User.destroy({
