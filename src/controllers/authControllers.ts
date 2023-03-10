@@ -108,22 +108,24 @@ export const loginUser = async (req: Request, res: Response) => {
 
 export const logoutUser = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.body;
+    const { token } = req.headers;
 
-    const userExist = await findOneUser({ id: userId });
-
-    if (!userExist) {
+    if (!token) {
       res.status(403).json({
         status: 403,
         success: false,
-        message: 'Tài khoản không tồn tại'
+        message: 'Không có thông tin token'
       });
     }
+
+    const dataDecoded = verify(String(token));
+
+    const { id } = dataDecoded?.decoded;
 
     const dateCurrent = moment().tz('Asia/Jakarta').format();
     const dateParse = new Date(Date.parse(dateCurrent));
 
-    const updateUser = await updateUserById({ lastLogin: dateParse }, userId);
+    const updateUser = await updateUserById({ lastLogin: dateParse }, id);
 
     if (updateUser) {
       res.status(201).json({

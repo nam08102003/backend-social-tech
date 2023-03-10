@@ -101,18 +101,19 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.loginUser = loginUser;
 const logoutUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { userId } = req.body;
-        const userExist = yield (0, userServices_1.findOneUser)({ id: userId });
-        if (!userExist) {
+        const { token } = req.headers;
+        if (!token) {
             res.status(403).json({
                 status: 403,
                 success: false,
-                message: 'Tài khoản không tồn tại'
+                message: 'Không có thông tin token'
             });
         }
+        const dataDecoded = (0, jwt_1.verify)(String(token));
+        const { id } = dataDecoded === null || dataDecoded === void 0 ? void 0 : dataDecoded.decoded;
         const dateCurrent = (0, moment_timezone_1.default)().tz('Asia/Jakarta').format();
         const dateParse = new Date(Date.parse(dateCurrent));
-        const updateUser = yield (0, userServices_1.updateUserById)({ lastLogin: dateParse }, userId);
+        const updateUser = yield (0, userServices_1.updateUserById)({ lastLogin: dateParse }, id);
         if (updateUser) {
             res.status(201).json({
                 status: 201,
