@@ -15,22 +15,22 @@ let Group = class Group extends sequelize_typescript_1.Model {
 };
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.INTEGER.UNSIGNED,
+        type: sequelize_typescript_1.DataType.UUID,
         allowNull: false,
-        autoIncrement: true,
+        defaultValue: sequelize_typescript_1.DataType.UUIDV4,
         primaryKey: true
     }),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], Group.prototype, "id", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }) //id người tạo
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }) //id người tạo
     ,
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], Group.prototype, "createdBy", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.INTEGER }) //id người sửa cuối cùng
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }) //id người sửa cuối cùng
     ,
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], Group.prototype, "updatedBy", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING, allowNull: false }),
@@ -47,7 +47,7 @@ __decorate([
     __metadata("design:type", String)
 ], Group.prototype, "slug", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.TEXT }) //Mô tả trang group
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }) //Mô tả trang group
     ,
     __metadata("design:type", String)
 ], Group.prototype, "description", void 0);
@@ -57,9 +57,14 @@ __decorate([
     __metadata("design:type", String)
 ], Group.prototype, "status", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.TEXT }),
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }) // Mới, Đang hoạt động, Đã khóa
+    ,
     __metadata("design:type", String)
-], Group.prototype, "content", void 0);
+], Group.prototype, "limit", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING }),
+    __metadata("design:type", String)
+], Group.prototype, "type", void 0);
 Group = __decorate([
     (0, sequelize_typescript_1.Table)({
         tableName: 'groups',

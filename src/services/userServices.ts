@@ -1,17 +1,18 @@
 import { encryptSync } from '../utils/encrypt';
 import { User } from '../models/connection';
 import { Op } from 'sequelize';
-import { size } from 'lodash';
+import { isString, size } from 'lodash';
 import ValidationErrors from '../errors/ValidationErrors';
 import { compareSync } from '../utils/encrypt';
 import moment from 'moment-timezone';
 
 export const createUser = async (payload: any) => {
   const gender = payload?.gender;
-  let timeFormat = payload?.birthday;
+  let timeParse: Date;
 
-  if (timeFormat) {
-    timeFormat = moment(payload.birthday).tz('Asia/Jakarta').format();
+  if (payload?.birthday) {
+    const timeFormat = moment(payload.birthday).tz('Asia/Jakarta').format();
+    timeParse = new Date(Date.parse(timeFormat));
   }
 
   if (gender.toUpperCase() === 'NỮ') {
@@ -20,14 +21,14 @@ export const createUser = async (payload: any) => {
     payload.gender = 'Male';
   }
 
-  payload.birthday = timeFormat;
+  payload.birthday = timeParse;
   payload.fullName = payload?.firstName + ' ' + payload?.lastName;
   payload.password = encryptSync(payload.password);
   const user = await User.create(payload);
   return user;
 };
 
-export const getUserById = async (id: number) => {
+export const getUserById = async (id: string) => {
   const user = await User.findByPk(id, {
     attributes: { exclude: ['password'] }
   });
@@ -99,11 +100,11 @@ export const findOneUser = async (options: any) => {
   return user;
 };
 
-export const updateUserById = (data: any, userId: number) => {
+export const updateUserById = (data: any, userId: string) => {
   if (!data && !userId) {
     throw new ValidationErrors('Vui lòng nhập dữ liệu cần thay đổi và idUser', 'errors');
   }
-  if (userId && isNaN(userId)) {
+  if (userId && isString(userId)) {
     throw new ValidationErrors('idUser không hợp lệ', 'errors');
   }
   if (data.id || userId) {
@@ -119,11 +120,11 @@ export const updateUserById = (data: any, userId: number) => {
   }
 };
 
-export const deleteUserById = (userId: number) => {
+export const deleteUserById = (userId: string) => {
   if (!userId) {
     throw new ValidationErrors('Please user id to delete', 'User');
   }
-  if (userId && isNaN(userId)) {
+  if (userId && isString(userId)) {
     throw new ValidationErrors('Invalid user id', 'User');
   }
 

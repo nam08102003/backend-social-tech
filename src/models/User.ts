@@ -6,12 +6,12 @@ import { Table, Column, DataType, IsEmail, Model } from 'sequelize-typescript';
 })
 export class User extends Model {
   @Column({
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.UUID,
     allowNull: false,
-    autoIncrement: true,
+    defaultValue: DataType.UUIDV4,
     primaryKey: true
   })
-  public id!: number;
+  public id!: string;
 
   @Column({ type: DataType.STRING, allowNull: true })
   public firstName!: string;
@@ -35,20 +35,17 @@ export class User extends Model {
   @Column({ type: DataType.STRING })
   public phone!: string;
 
-  @Column({ type: DataType.STRING })
-  public country!: string;
-
   @Column({ type: DataType.TEXT })
   public password!: string;
 
   @Column({ type: DataType.STRING })
-  public address!: string;
-
-  @Column({ type: DataType.TEXT })
   public intro!: string;
 
-  @Column({ type: DataType.TEXT })
+  @Column({ type: DataType.STRING })
   public avatar!: string;
+
+  @Column({ type: DataType.STRING })
+  public coverImage!: string;
 
   @Column({ type: DataType.DATE })
   public lastLogin!: Date;

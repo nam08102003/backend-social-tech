@@ -12,7 +12,8 @@ export const addFriend = async (req: Request, res: Response) => {
     const friend = getUserById(friendId);
 
     if (!user || !friend) {
-      res.status(400).json({
+      res.status(403).json({
+        status: 403,
         success: false,
         message: 'Tài khoản không tồn tại'
       });
@@ -20,7 +21,8 @@ export const addFriend = async (req: Request, res: Response) => {
 
     const result = await createFriend(data);
 
-    res.status(200).json({
+    res.status(201).json({
+      status: 201,
       success: true,
       message: 'Thêm bạn thành công',
       result

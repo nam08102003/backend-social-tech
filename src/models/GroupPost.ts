@@ -6,18 +6,18 @@ import { Table, Column, DataType, Model } from 'sequelize-typescript';
 })
 export class GroupPost extends Model {
   @Column({
-    type: DataType.INTEGER.UNSIGNED,
+    type: DataType.UUID,
     allowNull: false,
-    autoIncrement: true,
+    defaultValue: DataType.UUIDV4,
     primaryKey: true
   })
-  public id!: number;
+  public id!: string;
 
-  @Column({ type: DataType.INTEGER })
-  public groupId!: number;
+  @Column({ type: DataType.STRING })
+  public groupId!: string;
 
-  @Column({ type: DataType.INTEGER }) // Id người đăng
-  public UserId!: number;
+  @Column({ type: DataType.STRING }) // Id người đăng
+  public UserId!: string;
 
   @Column({ type: DataType.STRING })
   public title!: string;
@@ -27,4 +27,7 @@ export class GroupPost extends Model {
 
   @Column({ type: DataType.STRING }) //0: Công khai, 1: Thành viên, 2: Quản trị
   public type!: string;
+
+  @Column({ type: DataType.DATE }) //0: Công khai, 1: Thành viên, 2: Quản trị
+  public timePost!: Date;
 }

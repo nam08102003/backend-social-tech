@@ -24,13 +24,15 @@ const addFriend = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const user = (0, userServices_1.getUserById)(userId);
         const friend = (0, userServices_1.getUserById)(friendId);
         if (!user || !friend) {
-            res.status(400).json({
+            res.status(403).json({
+                status: 403,
                 success: false,
                 message: 'Tài khoản không tồn tại'
             });
         }
         const result = yield (0, friendServices_1.createFriend)(data);
-        res.status(200).json({
+        res.status(201).json({
+            status: 201,
             success: true,
             message: 'Thêm bạn thành công',
             result
